@@ -34,3 +34,11 @@
   sudo: yes
   template: src={{full_app_name}}.nginx.j2 dest=/etc/nginx/sites-enabled/{{full_app_name}}
   notify: restart_nginx
+
+###
+### Rails configuration via ENV / dotenv gem
+###
+
+- name: Deploy .env for {{full_app_name}}
+  sudo: yes
+  template: src={{full_app_name}}.env dest=~{{deploy}}/apps/{{full_app_name}}/shared/.env owner={{deploy}} group=www-data mode=0640

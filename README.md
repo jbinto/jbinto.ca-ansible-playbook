@@ -22,6 +22,14 @@ This project has several branches:
 
 It can be deployed locally using [Vagrant](http://www.vagrantup.com/) (i.e. for DEV environment), or in the cloud using [Digital Ocean](https://www.digitalocean.com/) (i.e. STAGING/PROD environments).
 
+## Bikeways-specific notes
+
+A sample `.env` file is provided in `roles/bikeways/templates/.env-example`. All configuration for the application is stored here, including but not limited to secrets.
+
+Change it as necessary and rename to `.env` before attempting to run the `build-server` playbook.
+
+The `.env` file itself is under gitignore, as it contains sensitive credentials and API keys.
+
 ## Overview
 
 Following various sources to create an idempotent, repeatable provisioning script for Rails applications (among other things) using Ansible.
