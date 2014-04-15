@@ -24,11 +24,11 @@ It can be deployed locally using [Vagrant](http://www.vagrantup.com/) (i.e. for 
 
 ## Bikeways-specific notes
 
-A sample `.env` file is provided in `roles/bikeways/templates/.env-example`. All configuration for the application is stored here, including but not limited to secrets.
+An example `bikeways.env.yml` file is provided in `vars/`. All configuration for the application is stored here, including but not limited to secrets.
 
-Change it as necessary and rename to `.env` before attempting to run the `build-server` playbook.
+Change it as necessary and rename to `bikeways.env.yml` before attempting to run the `build-server` playbook.
 
-The `.env` file itself is under gitignore, as it contains sensitive credentials and API keys.
+The `bikeways.env.yml` file itself is under gitignore, as it contains sensitive credentials and API keys.
 
 ## Overview
 

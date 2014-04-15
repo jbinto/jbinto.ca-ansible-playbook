@@ -22,6 +22,7 @@
   vars_files:
     - vars/defaults.yml
     - vars/bikeways.yml
+    - vars/bikeways.env.yml
   remote_user: "{{ deploy }}"
   roles:
     ### Server provisioning roles:
