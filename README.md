@@ -2,6 +2,12 @@
 
 **Forked from [jbinto/ansible-ubuntu-rails-server](https://github.com/jbinto/ansible-ubuntu-rails-server)**
 
+This project has several branches:
+
+* master
+* staging
+* production (soon)
+
 ## tl;dr
 
 [Ansible](http://docs.ansible.com/index.html) playbook to provision a Rails deployment server with:
