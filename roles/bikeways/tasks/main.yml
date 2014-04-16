@@ -1,4 +1,16 @@
 ##
+## Install dependencies/libraries
+##
+
+- name: Install PostGIS, geos, proj
+  action: apt pkg={{item}} state=installed update_cache=true
+  sudo: yes
+  with_items:
+    - libgeos-dev
+    - libproj-dev
+    - postgis
+
+##
 ## Postgres
 ##
 
