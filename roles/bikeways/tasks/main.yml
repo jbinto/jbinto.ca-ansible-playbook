@@ -3,7 +3,7 @@
 ##
 
 - name: Add the UbuntuGIS unstable PPA
-  action: command add-apt-repository -y  ppa:ubuntugis/ubuntugis-unstable creates=/etc/apt/sources.list.d/ubuntugis-ubuntugis-precise.list
+  action: command add-apt-repository -y  ppa:ubuntugis/ubuntugis-unstable creates=/etc/apt/sources.list.d/ubuntugis-ubuntugis-trusty.list
   sudo: yes
 
 - name: Install PostGIS, geos, proj
