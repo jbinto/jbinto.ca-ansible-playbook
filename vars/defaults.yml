@@ -7,7 +7,7 @@ deploy: gear
 password: $6$rounds=100000$5a6XLEmGtajh5xJl$rCKLTFR9vM1IfXPfW/TrwMGu8zgq5FpvOtNHqdOQqtrBxZtI.foxyml3QEfYPlX/ZkGjXhyAB6uCgmcctrsbD.
 
 # Ruby version to install
-ruby_version: 2.1.2
+ruby_version: 2.1.3
 rbenv_makeopts: ""
 
 # Papertrail logging
