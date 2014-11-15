@@ -23,6 +23,8 @@
     - vars/defaults.yml
     - vars/site-bikeways.yml
     - vars/site-bikeways.env.yml
+    - vars/site-ttchotline.yml
+    - vars/site-ttchotline.env.yml
   remote_user: "{{ deploy }}"
   roles:
     ### Server provisioning roles:
@@ -36,3 +38,4 @@
 
     ### Site specific roles:
     - { role: site-bikeways, tags: ['site-bikeways'] }
+    - { role: site-ttchotline, tags: ['site-ttchotline'] }
