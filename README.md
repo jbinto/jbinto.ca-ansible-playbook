@@ -24,13 +24,23 @@ This playbook is used to build `jbinto.ca`, which hosts several of my sites/appl
   * www.jbinto.ca (redirect)
   * www.416.bike (redirect)
 
-## How to add a new site
+## Cheatsheet
 
-TODO
+See detailed instructions below.
 
-## Bikeways-specific notes
+### Upgrading
 
-**TODO: Multiple envs**
+Staging:
+
+```
+ansible-playbook build-server.yml -i hosts-digitalocean -u staging0 -K -vvvv
+```
+
+### Adding a new site
+
+See commit 973cddc for more info. (TODO: make this easier)
+
+### Environments
 
 An example `site-bikeways.env.yml` file is provided in `vars/`. All configuration for the application is stored here, including but not limited to secrets.
 
