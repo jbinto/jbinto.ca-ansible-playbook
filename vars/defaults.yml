@@ -1,10 +1,10 @@
 ---
   # Unix user name to deploy as
-deploy: gear
+deploy: staging0
 
 # Crypted password for 'deploy' Unix user.
 # To generate, use generate-crypted-password.py
-password: $6$rounds=100000$5a6XLEmGtajh5xJl$rCKLTFR9vM1IfXPfW/TrwMGu8zgq5FpvOtNHqdOQqtrBxZtI.foxyml3QEfYPlX/ZkGjXhyAB6uCgmcctrsbD.
+password: $6$rounds=100000$jVzWy2gSZDf3cNic$Bcnz8Imz3YJnoELR8EPyTw1MNkiJidpwSOuoV7CLt1KuIpd5G67UEOiTBTxTBHOSW9RssAVnaOgkjUC.GpLcy0
 
 # Ruby version to install
 ruby_version: 2.1.5

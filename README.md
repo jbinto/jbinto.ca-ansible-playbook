@@ -32,11 +32,11 @@ TODO
 
 **TODO: Multiple envs**
 
-An example `bikeways.env.yml` file is provided in `vars/`. All configuration for the application is stored here, including but not limited to secrets.
+An example `site-bikeways.env.yml` file is provided in `vars/`. All configuration for the application is stored here, including but not limited to secrets.
 
-Change it as necessary and rename to `bikeways.env.yml` before attempting to run the `build-server` playbook.
+Change it as necessary and rename to `site-bikeways.env.yml` before attempting to run the `build-server` playbook.
 
-The `bikeways.env.yml` file itself is under gitignore, as it contains sensitive credentials and API keys.
+The `site-bikeways.env.yml` file itself is under gitignore, as it contains sensitive credentials and API keys.
 
 ## Usage (locally via Vagrant)
 
