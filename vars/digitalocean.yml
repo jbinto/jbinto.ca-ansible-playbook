@@ -15,8 +15,8 @@
 
 default_key: 93562
 
-droplet_hostname: staging.416.bike  # used as DigitalOcean machine name, PTR record, and DNS entry
-droplet_region: 4        # tugboat regions -> "New York 2 (id: 4)"
+droplet_hostname: staging.jbinto.ca  # used as DigitalOcean machine name, PTR record, and DNS entry
+droplet_region: 8        # tugboat regions -> "New York 3 (id: 8)"
 droplet_size: 63         # tugboat sizes -> "1GB (id: 63)"
-droplet_image: 6510539   # tugboat images --global -> "Ubuntu 14.04 x64"
+droplet_image: 6918990   # tugboat images --global -> "14.04 x64 (id: 6918990, distro: Ubuntu)" 
 
