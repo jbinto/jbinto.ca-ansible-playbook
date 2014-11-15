@@ -2,6 +2,8 @@
 
 **Forked from [jbinto/ansible-ubuntu-rails-server](https://github.com/jbinto/ansible-ubuntu-rails-server)**
 
+**TODO:** Refactor production/master branches so that files don't cause merge conflicts.
+
 This playbook is used to build `jbinto.ca`, which hosts several of my sites/applications.
 
 ## Software
@@ -16,8 +18,8 @@ This playbook is used to build `jbinto.ca`, which hosts several of my sites/appl
 ## Sites/web applications
 
 * Prepares multiple nginx vhosts for Rails apps, ready for deployment with `cap`:
-  * staging.416.bike
-  * ttchotline-staging.uniquename.org (for now, until we get a real domain)
+  * 416.bike
+  * ttchotline.uniquename.org (for now, until we get a real domain)
 
 ## Cheatsheet
 
@@ -25,10 +27,10 @@ See detailed instructions below.
 
 ### Upgrading
 
-Staging:
+Production:
 
 ```
-ansible-playbook build-server.yml -i hosts-digitalocean -u staging0 -K -vvvv
+ansible-playbook build-server.yml -i hosts-digitalocean -u production0 -K -vvvv
 ```
 
 ### Adding a new site
