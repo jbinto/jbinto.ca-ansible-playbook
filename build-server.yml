@@ -21,8 +21,6 @@
 - hosts: all
   vars_files:
     - vars/defaults.yml
-    - vars/bikeways.yml
-    - vars/bikeways.env.yml
   remote_user: "{{ deploy }}"
   roles:
     ### Server provisioning roles:
@@ -34,5 +32,23 @@
     - { role: papertrail, tags: ['papertrail'] }
     - { role: nginx-passenger, tags: ['nginx-passenger'] }
 
-    ### Site specific roles:
-    - { role: bikeways, tags: ['bikeways'] }
+
+### XXX: this is not very DRY, how can we improve this?
+- hosts: all
+  vars_files:
+    - vars/defaults.yml
+    - vars/site-bikeways.yml
+    - vars/site-bikeways.env.yml
+  remote_user: "{{ deploy }}"
+  roles:
+    - { role: site-bikeways, tags: ['site-bikeways'] }
+
+
+- hosts: all
+  vars_files:
+    - vars/defaults.yml
+    - vars/site-ttchotline.yml
+    - vars/site-ttchotline.env.yml
+  remote_user: "{{ deploy }}"
+  roles:
+    - { role: site-ttchotline, tags: ['site-ttchotline'] }

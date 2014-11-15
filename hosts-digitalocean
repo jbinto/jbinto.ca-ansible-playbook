@@ -1,2 +1,2 @@
 [webservers]
-staging.416.bike ansible_ssh_host=107.170.87.216
+staging.jbinto.ca ansible_ssh_host=104.131.164.190
