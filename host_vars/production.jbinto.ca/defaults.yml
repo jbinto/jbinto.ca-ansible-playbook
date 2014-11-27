@@ -1,6 +1,8 @@
 ---
-  # Unix user name to deploy as
-deploy: staging0
+whereami: production
+
+# Unix user name to deploy as
+deploy: production0
 
 # Crypted password for 'deploy' Unix user.
 # To generate, use generate-crypted-password.py

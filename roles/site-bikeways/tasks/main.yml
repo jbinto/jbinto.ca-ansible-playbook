@@ -18,43 +18,43 @@
 ## Postgres
 ##
 
-- name: Create {{database_name}} database
+- name: Create {{bikeways_database_name}} database
   sudo: yes
   sudo_user: postgres
-  postgresql_db: name={{database_name}}
+  postgresql_db: name={{bikeways_database_name}}
 
-- name: Create SUPERUSER {{database_user}} on {{database_name}}
+- name: Create SUPERUSER {{bikeways_database_user}} on {{bikeways_database_name}}
   sudo: yes
   sudo_user: postgres
-  postgresql_user: db={{database_name}}
-                   name={{database_user}}
-                   password={{database_password}}
+  postgresql_user: db={{bikeways_database_name}}
+                   name={{bikeways_database_user}}
+                   password={{bikeways_database_password}}
                    role_attr_flags=CREATEDB,SUPERUSER
 
 ##
 ## Rails
 ##
 
-- name: mkdir -p ~{{deploy}}/apps/{{full_app_name}}/shared/config
-  file: path=~{{deploy}}/apps/{{full_app_name}}/shared/config state=directory
+- name: mkdir -p ~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/config
+  file: path=~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/config state=directory
 
 - name: Copy database.yml to config
   sudo: yes   # or chgrp will fail. For some reason, the setgid doesn't work here.
-  template: src=database.yml.j2 dest=~{{deploy}}/apps/{{full_app_name}}/shared/config/database.yml owner={{deploy}} group=www-data mode=0640
+  template: src=database.yml.j2 dest=~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/config/database.yml owner={{deploy}} group=www-data mode=0640
 
 ###
 ### Nginx
 ###
 
-- name: Deploy {{full_app_name}} nginx config to sites-available
+- name: Deploy {{bikeways_full_app_name}} nginx config to sites-available
   sudo: yes
-  template: src={{full_app_name}}.nginx.j2 dest=/etc/nginx/sites-enabled/{{full_app_name}}
+  template: src={{bikeways_full_app_name}}.nginx.j2 dest=/etc/nginx/sites-enabled/{{bikeways_full_app_name}}
   notify: restart_nginx
 
 ###
 ### Rails configuration via ENV / dotenv gem
 ###
 
-- name: Deploy .env for {{full_app_name}}
+- name: Deploy .env for {{bikeways_full_app_name}}
   sudo: yes
-  template: src={{full_app_name}}.env dest=~{{deploy}}/apps/{{full_app_name}}/shared/.env owner={{deploy}} group=www-data mode=0640
+  template: src={{bikeways_full_app_name}}.env dest=~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/.env owner={{deploy}} group=www-data mode=0640
