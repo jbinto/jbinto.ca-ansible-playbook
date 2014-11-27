@@ -1,6 +1,6 @@
 # jbinto/jbinto.ca-ansible-playbook
 
-**Forked from [jbinto/ansible-ubuntu-rails-server](https://github.com/jbinto/ansible-ubuntu-rails-server)**
+**Forked from [jbinto/ansible-ubuntu-rails-server](https://github.com/jbinto/ansible-ubuntu-rails-server)**. See there for more detailed (but perhaps outdated) docs.
 
 This playbook is used to build `jbinto.ca`, which hosts several of my sites/applications.
 
@@ -33,15 +33,16 @@ This playbook is used to build `jbinto.ca`, which hosts several of my sites/appl
 
 See detailed instructions below.
 
-### Prerequisites
+### Pre-requisites
 
-First, install `pip` via homebrew. Then install `ansible` & `dopy` modules via:
+* Install `pip` via homebrew
+* Install required Python modules (`ansible`, `dopy`, `passlib`, etc):
 
 ```
 sudo pip install -r requirements.txt
 ```
 
-### Provisioning on DigitalOcean
+### Spin up a new DigitalOcean droplet
 
 `dopy` (python, ansible) and `tugboat` (ruby, for command-line support only) currently use DigitalOcean APIv1. This will have to be updated to use APIv2 at a later date. 
 
@@ -55,19 +56,53 @@ To provision, run:
 ansible-playbook provision-digitalocean.yml -i local 
 ```
 
-You will have to set up the DNS (A record) manually. 
+### Droplet post-requisites
 
-### Upgrading
+* A new DNS zone is created for each droplet you create, and is handled by DigitalOcean's DNS. This may not be exactly what you want. Configure your DNS manually if necessary.
 
-Production:
+* Generate a crypted Linux/root password for your environment:
 
 ```
-ansible-playbook build-server.yml -i hosts-digitalocean -u production0 -K -vvvv
+python support/generate-crypted-password.py
 ```
 
-### Adding a new site
+Paste the crypted password into the `password` field (in `host_vars/{{HOST}}/defaults.yml`)
 
-See commit 973cddc for more info. (TODO: make this easier)
+* Add the IP address of your new droplet to `hosts-production` or `hosts-staging`. You can find it at: https://cloud.digitalocean.com/droplets
+
+### Building (or upgrading) server on DigitalOcean
+
+```
+ansible-playbook build-server.yml -i $INVENTORY -u $USER -K -vvvv
+```
+
+Where `$INVENTORY` is one of: `hosts-production`, `hosts-staging`
+
+And `$USER` is one of: `root` (first run only), `staging0`, `production0`.
+
+To only run a specific tag, add `--tags`, e.g.:
+
+```
+ansible-playbook build-server.yml -i $INVENTORY -u $USER -K -vvvv --tags site-bikeways
+```
+
+### Deploying a Rails site
+
+This playbook only prepares the execution environment (e.g. Passenger, nginx, Postgres, dotenv).
+
+From here, it's time to continue with a Capistrano deployment, e.g. [rails4-sample-app-capistrano](https://github.com/jbinto/rails4-sample-app-capistrano). 
+
+### Adding a new Rails site
+
+TODO, but basically clone `roles/site-bikeways` and add the new role to `build-server.yml`
+
+### Configuration
+
+Hosts are defined in two separate inventory files: `hosts-production` and `hosts-staging`.
+
+All roles contain content that is common between execution environments. Elements that differ should be factored out into Ansible variables.
+
+Host-specific configuration is available in `host_vars/{{HOST}}/*`. All files within the host directory are loaded.
 
 ### Environments
 
