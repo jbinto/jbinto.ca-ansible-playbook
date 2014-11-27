@@ -1,2 +1,2 @@
 [webservers-production]
-production.jbinto.ca ansible_ssh_host=127.0.0.1
+production.jbinto.ca ansible_ssh_host=104.131.85.181
