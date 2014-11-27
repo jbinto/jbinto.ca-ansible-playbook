@@ -1,9 +1,9 @@
 server {
-  rails_env staging;
+  rails_env {{ bikeways_rails_env }};
 
   listen 80;
-  server_name {{ server_name }};
-  root /home/{{deploy}}/apps/{{full_app_name}}/current/public;
+  server_name {{ bikeways_server_name }};
+  root /home/{{deploy}}/apps/{{ bikeways_full_app_name }}/current/public;
   passenger_enabled on;
 
   # warning: cargo cult server optimization ahead
