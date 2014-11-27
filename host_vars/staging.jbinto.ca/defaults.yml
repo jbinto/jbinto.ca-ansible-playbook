@@ -6,7 +6,7 @@ deploy: staging0
 
 # Crypted password for 'deploy' Unix user.
 # To generate, use generate-crypted-password.py
-password: $6$rounds=100000$t/J16vBsC3Fs1cRw$rhRB1OmEAvBol66N4CT/hS.V6bgKkAI97kXm6HWE9vIqnTpaeqMjuN1oh9KTS5nxM8xdy1ka9/nQCwt596vkj/
+password: $6$rounds=100000$meVqMOAJNEN26HJh$B6SNn0WofohE3rdCCqnZ14tydHPHidLx6l6k023BjQ1KwxWrxU2tAjOVh6WREMtpay/N9uYp.wkIFoapEXVOu0
 
 # Ruby version to install
 ruby_version: 2.1.5
