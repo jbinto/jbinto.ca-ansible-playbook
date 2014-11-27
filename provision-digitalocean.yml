@@ -5,5 +5,8 @@
   vars_files:
     - vars/digitalocean.yml
 
+  vars_prompt:
+    droplet_hostname: "Hostname for new droplet"
+
   roles:
     - { role: digitalocean, tags: ['digitalocean'] }
