@@ -92,6 +92,9 @@ This playbook only prepares the execution environment (e.g. Passenger, nginx, Po
 
 From here, it's time to continue with a Capistrano deployment, e.g. [rails4-sample-app-capistrano](https://github.com/jbinto/rails4-sample-app-capistrano). 
 
+It should be as sample as `cap staging deploy`.
+
+
 ### Adding a new Rails site
 
 TODO, but basically clone `roles/site-bikeways` and add the new role to `build-server.yml`
