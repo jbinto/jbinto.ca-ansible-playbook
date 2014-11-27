@@ -114,3 +114,8 @@ All roles contain content that is common between execution environments. Element
 
 Host-specific configuration is available in `host_vars/{{HOST}}/*`. All files within the host directory are loaded.
 
+### Gotchas / caveats / issues
+
+* After upgrading the kernel (and definitely after the first installation), a reboot may be necessary. As of right now, the only way to do so is to `ssh` manually into the box. This is no big deal, as the SSH key is already set up.
+
+* After upgrading nginx, Passenger, or ruby version, nginx must be restarted. (XXX: how?)
