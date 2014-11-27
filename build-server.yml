@@ -10,8 +10,6 @@
 ### (The included Vagrantfile will use -u vagrant. For DigitalOcean, use -u root.)
 
 - hosts: all
-  vars_files:
-    - vars/defaults.yml
   sudo: True
   # user: intentionally blank
   roles:
@@ -19,8 +17,6 @@
 
 
 - hosts: all
-  vars_files:
-    - vars/defaults.yml
   remote_user: "{{ deploy }}"
   roles:
     ### Server provisioning roles:
@@ -32,23 +28,7 @@
     - { role: papertrail, tags: ['papertrail'] }
     - { role: nginx-passenger, tags: ['nginx-passenger'] }
 
-
-### XXX: this is not very DRY, how can we improve this?
 - hosts: all
-  vars_files:
-    - vars/defaults.yml
-    - vars/site-bikeways.yml
-    - vars/site-bikeways.env.yml
   remote_user: "{{ deploy }}"
   roles:
     - { role: site-bikeways, tags: ['site-bikeways'] }
-
-
-- hosts: all
-  vars_files:
-    - vars/defaults.yml
-    - vars/site-ttchotline.yml
-    - vars/site-ttchotline.env.yml
-  remote_user: "{{ deploy }}"
-  roles:
-    - { role: site-ttchotline, tags: ['site-ttchotline'] }
