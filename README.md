@@ -2,9 +2,17 @@
 
 **Forked from [jbinto/ansible-ubuntu-rails-server](https://github.com/jbinto/ansible-ubuntu-rails-server)**
 
-**TODO:** Refactor production/master branches so that files don't cause merge conflicts.
-
 This playbook is used to build `jbinto.ca`, which hosts several of my sites/applications.
+
+## Current state
+
+**BROKEN/WIP.** I'm tackling a couple of things at once.
+
+* **1) Being able to deploy to multiple environments (staging/production).**
+  * This requires factoring out everything environment-specific into `host_vars`.
+  * Originally I tried to do `production` and `staging` git branches, but that doesn't make sense for this application. Instead, what I'll probably do is `master`, `live-staging`, and `live-production`. Do work on master, as it is applied, merge into the other branches.
+* **2) Being able to deploy multiple Rails apps.**
+  * Many of the variables were named naïvely, assuming there would only be one instance. I've prefixed everything.
 
 ## Software
 
