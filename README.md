@@ -33,6 +33,30 @@ This playbook is used to build `jbinto.ca`, which hosts several of my sites/appl
 
 See detailed instructions below.
 
+### Prerequisites
+
+First, install `pip` via homebrew. Then install `ansible` & `dopy` modules via:
+
+```
+sudo pip install -r requirements.txt
+```
+
+### Provisioning on DigitalOcean
+
+`dopy` (python, ansible) and `tugboat` (ruby, for command-line support only) currently use DigitalOcean APIv1. This will have to be updated to use APIv2 at a later date. 
+
+Get your legacy API key at http://cloud.digitalocean.com/api_access and set magic environment variables `DO_CLIENT_ID` and `DO_API_KEY`.
+
+Configuration (droplet size, region, etc.) available in `vars/digitalocean.yml`. You will be interactively prompted to enter the hostname.
+
+To provision, run:
+
+```
+ansible-playbook provision-digitalocean.yml -i local 
+```
+
+You will have to set up the DNS (A record) manually. 
+
 ### Upgrading
 
 Production:
