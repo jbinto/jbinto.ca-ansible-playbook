@@ -70,6 +70,14 @@ Paste the crypted password into the `password` field (in `host_vars/{{HOST}}/def
 
 * Add the IP address of your new droplet to `hosts-production` or `hosts-staging`. You can find it at: https://cloud.digitalocean.com/droplets
 
+### Preparing .env (dotenv) from examples for each site
+
+An example `site-bikeways.env.yml` file is provided in `examples/`. All environment-specific configuration for the application is stored here, including but not limited to secrets.
+
+Change it as necessary, and copy to `host_vars/{{HOST}}/site-bikeways.env.yml` before attempting to run the `build-server` playbook.
+
+The wildcard `*.env.yml` file itself is under gitignore, as these files could contain sensitive credentials and API keys.
+
 ### Building (or upgrading) server on DigitalOcean
 
 ```
@@ -92,8 +100,7 @@ This playbook only prepares the execution environment (e.g. Passenger, nginx, Po
 
 From here, it's time to continue with a Capistrano deployment, e.g. [rails4-sample-app-capistrano](https://github.com/jbinto/rails4-sample-app-capistrano). 
 
-It should be as sample as `cap staging deploy`.
-
+Once all configured (`config/deploy/*`), it should be as sample as `cap staging deploy`.
 
 ### Adding a new Rails site
 
@@ -107,10 +114,3 @@ All roles contain content that is common between execution environments. Element
 
 Host-specific configuration is available in `host_vars/{{HOST}}/*`. All files within the host directory are loaded.
 
-### Environments
-
-An example `site-bikeways.env.yml` file is provided in `vars/`. All configuration for the application is stored here, including but not limited to secrets.
-
-Change it as necessary and rename to `site-bikeways.env.yml` before attempting to run the `build-server` playbook.
-
-The `site-bikeways.env.yml` file itself is under gitignore, as it contains sensitive credentials and API keys.
