@@ -1,6 +1,7 @@
 server {
   rails_env {{ ttchotline_rails_env }};
 
+
   listen 80;
   server_name {{ ttchotline_server_name }};
   root /home/{{deploy}}/apps/{{ ttchotline_full_app_name }}/current/public;
