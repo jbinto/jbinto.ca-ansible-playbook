@@ -32,3 +32,4 @@
   remote_user: "{{ deploy }}"
   roles:
     - { role: site-bikeways, tags: ['site-bikeways'] }
+    - { role: site-ttchotline, tags: ['site-ttchotline'] }

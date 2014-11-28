@@ -1,0 +1,44 @@
+##
+## Postgres
+##
+
+- name: Create {{ttchotline_database_name}} database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name={{ttchotline_database_name}}
+
+- name: Create SUPERUSER {{ttchotline_database_user}} on {{ttchotline_database_name}}
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: db={{ttchotline_database_name}}
+                   name={{ttchotline_database_user}}
+                   password={{ttchotline_database_password}}
+                   role_attr_flags=CREATEDB,SUPERUSER
+
+##
+## Rails
+##
+
+- name: mkdir -p ~{{deploy}}/apps/{{ttchotline_full_app_name}}/shared/config
+  file: path=~{{deploy}}/apps/{{ttchotline_full_app_name}}/shared/config state=directory
+
+- name: Copy database.yml to config
+  sudo: yes   # or chgrp will fail. For some reason, the setgid doesn't work here.
+  template: src=database.yml.j2 dest=~{{deploy}}/apps/{{ttchotline_full_app_name}}/shared/config/database.yml owner={{deploy}} group=www-data mode=0640
+
+###
+### Nginx
+###
+
+- name: Deploy {{ttchotline_full_app_name}} nginx config to sites-available
+  sudo: yes
+  template: src={{ttchotline_full_app_name}}.nginx.j2 dest=/etc/nginx/sites-enabled/{{ttchotline_full_app_name}}
+  notify: restart_nginx
+
+###
+### Rails configuration via ENV / dotenv gem
+###
+
+- name: Deploy .env for {{ttchotline_full_app_name}}
+  sudo: yes
+  template: src={{ttchotline_full_app_name}}.env dest=~{{deploy}}/apps/{{ttchotline_full_app_name}}/shared/.env owner={{deploy}} group=www-data mode=0640
