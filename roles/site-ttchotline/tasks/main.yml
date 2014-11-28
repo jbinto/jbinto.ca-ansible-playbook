@@ -1,0 +1,60 @@
+##
+## Install dependencies/libraries
+##
+
+- name: Add the UbuntuGIS unstable PPA
+  action: command add-apt-repository -y  ppa:ubuntugis/ubuntugis-unstable creates=/etc/apt/sources.list.d/ubuntugis-ubuntugis-trusty.list
+  sudo: yes
+
+- name: Install PostGIS, geos, proj
+  action: apt pkg={{item}} state=installed update_cache=true
+  sudo: yes
+  with_items:
+    - libgeos-dev
+    - libproj-dev
+    - postgresql-9.3-postgis-2.1
+
+##
+## Postgres
+##
+
+- name: Create {{bikeways_database_name}} database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name={{bikeways_database_name}}
+
+- name: Create SUPERUSER {{bikeways_database_user}} on {{bikeways_database_name}}
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: db={{bikeways_database_name}}
+                   name={{bikeways_database_user}}
+                   password={{bikeways_database_password}}
+                   role_attr_flags=CREATEDB,SUPERUSER
+
+##
+## Rails
+##
+
+- name: mkdir -p ~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/config
+  file: path=~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/config state=directory
+
+- name: Copy database.yml to config
+  sudo: yes   # or chgrp will fail. For some reason, the setgid doesn't work here.
+  template: src=database.yml.j2 dest=~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/config/database.yml owner={{deploy}} group=www-data mode=0640
+
+###
+### Nginx
+###
+
+- name: Deploy {{bikeways_full_app_name}} nginx config to sites-available
+  sudo: yes
+  template: src={{bikeways_full_app_name}}.nginx.j2 dest=/etc/nginx/sites-enabled/{{bikeways_full_app_name}}
+  notify: restart_nginx
+
+###
+### Rails configuration via ENV / dotenv gem
+###
+
+- name: Deploy .env for {{bikeways_full_app_name}}
+  sudo: yes
+  template: src={{bikeways_full_app_name}}.env dest=~{{deploy}}/apps/{{bikeways_full_app_name}}/shared/.env owner={{deploy}} group=www-data mode=0640
